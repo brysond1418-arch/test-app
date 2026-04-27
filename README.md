@@ -30,28 +30,29 @@ npm run check
 
 This app is static, so GitHub Pages can host it for free.
 
-### One-time GitHub setup
+### Dirt-simple setup
 
 1. Open the repository on GitHub.
 2. Go to **Settings** -> **Pages**.
-3. Under **Build and deployment**, set **Source** to **GitHub Actions**.
-4. Save the setting.
+3. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
+4. Set **Branch** to `main`.
+5. Set the folder to `/root`.
+6. Save.
 
 ### Deploy
 
-After the setup above, every push to the `main` branch deploys the app automatically.
-The included workflow publishes these files from the repository root:
+After the setup above, every push directly to the `main` branch deploys the app
+automatically. There is no build step and no separate deployment workflow.
+
+The live site uses these root files:
 
 - `index.html`
 - `styles.css`
 - `app.js`
-- `package.json`
-- `README.md`
 
 ### Open the live app
 
-After the workflow finishes, GitHub shows the app URL in **Settings** -> **Pages**.
-It usually looks like:
+GitHub shows the app URL in **Settings** -> **Pages**. It usually looks like:
 
 ```text
 https://<your-github-username>.github.io/<repository-name>/
