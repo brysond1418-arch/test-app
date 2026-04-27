@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal CRM</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Personal CRM</p>
+          <h1>Keep meaningful relationships warm.</h1>
+          <p class="hero-copy">
+            Track people, context, notes, and follow-ups in one simple workspace.
+          </p>
+        </div>
+        <button class="primary-action" id="new-contact-button" type="button">
+          Add contact
+        </button>
+      </section>
+
+      <section class="stats-grid" aria-label="CRM summary">
+        <article class="stat-card">
+          <span id="total-contacts">0</span>
+          <p>Total contacts</p>
+        </article>
+        <article class="stat-card">
+          <span id="due-soon">0</span>
+          <p>Due in 7 days</p>
+        </article>
+        <article class="stat-card">
+          <span id="priority-count">0</span>
+          <p>High priority</p>
+        </article>
+      </section>
+
+      <section class="toolbar" aria-label="Contact filters">
+        <label class="search-box">
+          <span>Search</span>
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Name, company, tag, or note"
+            autocomplete="off"
+          />
+        </label>
+        <label>
+          <span>Relationship</span>
+          <select id="relationship-filter">
+            <option value="all">All relationships</option>
+            <option value="Friend">Friend</option>
+            <option value="Family">Family</option>
+            <option value="Work">Work</option>
+            <option value="Mentor">Mentor</option>
+            <option value="Prospect">Prospect</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="content-grid">
+        <section class="contacts-panel" aria-labelledby="contacts-heading">
+          <div class="panel-heading">
+            <h2 id="contacts-heading">Contacts</h2>
+            <p id="contact-count-label">0 people</p>
+          </div>
+          <div class="contact-list" id="contact-list"></div>
+        </section>
+
+        <section class="detail-panel" aria-labelledby="detail-heading">
+          <div id="empty-state" class="empty-state">
+            <h2 id="detail-heading">Select a contact</h2>
+            <p>Choose someone from your list or add a new contact to get started.</p>
+          </div>
+
+          <form id="contact-form" class="contact-form hidden">
+            <input id="contact-id" name="id" type="hidden" />
+            <div class="form-header">
+              <div>
+                <p class="eyebrow">Contact details</p>
+                <h2 id="form-title">New contact</h2>
+              </div>
+              <button id="delete-button" class="ghost danger" type="button">Delete</button>
+            </div>
+
+            <div class="form-grid">
+              <label>
+                <span>Name</span>
+                <input id="name" name="name" required placeholder="Avery Johnson" />
+              </label>
+              <label>
+                <span>Company</span>
+                <input id="company" name="company" placeholder="Acme Studio" />
+              </label>
+              <label>
+                <span>Relationship</span>
+                <select id="relationship" name="relationship">
+                  <option>Friend</option>
+                  <option>Family</option>
+                  <option>Work</option>
+                  <option>Mentor</option>
+                  <option>Prospect</option>
+                  <option>Other</option>
+                </select>
+              </label>
+              <label>
+                <span>Priority</span>
+                <select id="priority" name="priority">
+                  <option>Low</option>
+                  <option selected>Medium</option>
+                  <option>High</option>
+                </select>
+              </label>
+              <label>
+                <span>Email</span>
+                <input id="email" name="email" type="email" placeholder="avery@example.com" />
+              </label>
+              <label>
+                <span>Phone</span>
+                <input id="phone" name="phone" type="tel" placeholder="(555) 123-4567" />
+              </label>
+              <label>
+                <span>Last contacted</span>
+                <input id="last-contacted" name="lastContacted" type="date" />
+              </label>
+              <label>
+                <span>Next follow-up</span>
+                <input id="next-follow-up" name="nextFollowUp" type="date" />
+              </label>
+            </div>
+
+            <label>
+              <span>Tags</span>
+              <input id="tags" name="tags" placeholder="investor, running, design" />
+            </label>
+
+            <label>
+              <span>Notes</span>
+              <textarea
+                id="notes"
+                name="notes"
+                rows="6"
+                placeholder="What matters to them? What did you discuss last time?"
+              ></textarea>
+            </label>
+
+            <div class="form-actions">
+              <button class="ghost" id="cancel-button" type="button">Cancel</button>
+              <button class="primary-action" type="submit">Save contact</button>
+            </div>
+          </form>
+        </section>
+      </section>
+    </main>
+
+    <template id="contact-card-template">
+      <button class="contact-card" type="button">
+        <span class="avatar" aria-hidden="true"></span>
+        <span class="contact-summary">
+          <strong class="contact-name"></strong>
+          <span class="contact-meta"></span>
+          <span class="contact-tags"></span>
+        </span>
+        <span class="follow-up-badge"></span>
+      </button>
+    </template>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
