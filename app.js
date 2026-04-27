@@ -150,7 +150,9 @@ function renderList() {
     card.querySelector(".contact-name").textContent = contact.name || "Unnamed";
     card.querySelector(".contact-meta").textContent = [contact.company, contact.relationship].filter(Boolean).join(" · ");
     card.querySelector(".contact-tags").textContent = tags || "No tags yet";
-    card.querySelector(".follow-up-badge").textContent = followUpLabel(contact.nextFollowUp);
+    const followUpBadge = card.querySelector(".follow-up-badge");
+    followUpBadge.textContent = followUpLabel(contact.nextFollowUp);
+    followUpBadge.dataset.status = followUpStatus(contact.nextFollowUp);
     card.addEventListener("click", () => selectContact(contact.id));
 
     contactList.append(card);
@@ -288,6 +290,16 @@ function followUpLabel(dateValue) {
   if (days <= 7) return `${days} days`;
 
   return formatDate(dateValue);
+}
+
+function followUpStatus(dateValue) {
+  if (!dateValue) return "none";
+
+  const days = daysUntil(dateValue);
+  if (days < 0) return "overdue";
+  if (days <= 1) return "urgent";
+  if (days <= 7) return "soon";
+  return "later";
 }
 
 function daysUntil(dateValue) {
